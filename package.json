@@ -1,0 +1,25 @@
+{
+  "name": "ecbd-mongo",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-scripts": "1.1.1"
+  },
+  "scripts": {
+    "babel-node": "babel-node --presets=latest",
+    "start": "react-scripts start",
+    "api": "npx nodemon --exec npm run babel-node server/index.js",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-latest": "^6.24.1",
+    "babel-register": "^6.26.0",
+    "koa": "^2.5.0",
+    "nodemon": "^1.17.1"
+  }
+}
