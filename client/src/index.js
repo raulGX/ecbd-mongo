@@ -7,13 +7,11 @@ import Header from './components/common/Header';
 import Login from './components/common/Login';
 import Register from './components/common/Register';
 import HomePage from './components/home/HomePage';
-import RecipePage from './components/recipes/RecipePage';
-import MyRecipes from './components/recipes/MyRecipes';
-import MyRecipe from './components/recipes/MyRecipe';
-import SpecificRecipePage from './components/recipes/SpecificRecipePage';
+import ArticlesPage from './components/articles/Articles';
+import MyArticles from './components/articles/MyArticles';
+import MyArticle from './components/articles/MyArticle';
+import SpecificArticlePage from './components/articles/SpecificArticlePage';
 
-import IngredientsPage from './components/ingredients/IngredientsPage';
-import CategoriesPage from './components/categories/CategoriesPage';
 import 'bootstrap/dist/css/bootstrap.css';
 import './App.css'
 
@@ -22,12 +20,10 @@ render(
     <div>
       <Header />
       <Route exact path='/' component={HomePage} />
-      <Route exact path='/recipes' component={RecipePage} />
-      <Route exact path='/myrecipes' component={MyRecipes} />
-      <Route path='/myrecipes/:recipeId' component={MyRecipe} />
-      <Route path='/recipes/:recipeId' component={SpecificRecipePage} />
-      <Route path='/ingredients' component={IngredientsPage} />
-      <Route path='/categories' component={CategoriesPage} />
+      <Route exact path='/articles' component={ArticlesPage} />
+      <Route exact path='/myarticles' component={MyArticles} />
+      <Route path='/myarticles/:articleId' component={MyArticle} />
+      <Route path='/articles/:articleId' component={SpecificArticlePage} />
       <Route path='/login' component={Login} />
       <Route path='/register' component={Register} />
     </div>

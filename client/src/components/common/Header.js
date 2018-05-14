@@ -22,7 +22,8 @@ class Header extends React.Component {
   }
   render() {
     let loginSide;
-    if (!localStorage.getItem("token")) {
+    let isLogged = localStorage.getItem("token")
+    if (!isLogged) {
       loginSide =
         <ul className="nav navbar-nav navbar-right">
           <li><NavLink to="/login" activeClassName="active">Login</NavLink></li>
@@ -34,7 +35,7 @@ class Header extends React.Component {
           <li className="dropdown">
             <a className="dropdown-toggle" data-toggle="dropdown" onClick={this.toggleMenu} role="button">My account <span className="caret"></span></a>
             <ul ref={input => this.menu = input} onClick={this.toggleMenu} className={"dropdown-menu display-" + this.state.showMenu}>
-              <li><NavLink to="/myrecipes" activeClassName="active">My Recipes</NavLink></li>
+              <li><NavLink to="/myArticles" activeClassName="active">My Articles</NavLink></li>
               <li><NavLink to="/" onClick={this.logout} activeClassName="active">Logout</NavLink></li>
             </ul>
           </li>
@@ -45,9 +46,7 @@ class Header extends React.Component {
         <nav className="navbar navbar-default">
           <ul className="nav navbar-nav">
             <li><NavLink exact to="/" activeClassName="active">Home</NavLink></li>
-            <li><NavLink to="/recipes" activeClassName="active">Recipes</NavLink></li>
-            <li><NavLink to="/ingredients" activeClassName="active">Ingredients</NavLink></li>
-            <li><NavLink to="/categories" activeClassName="active">Ingredient Categories</NavLink></li>
+            <li><NavLink to="/articles" activeClassName="active">Articles</NavLink></li>
           </ul>
           {loginSide}
         </nav>
