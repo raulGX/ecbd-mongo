@@ -1,23 +1,25 @@
 package com.ecbd.Entity;
 
 public class Article {
-    private int id;
+    private String id;
     private String name;
     private String body;
+    private String userId;
 
-    public Article(int id, String name, String body) {
+    public Article(String id, String name, String body, String userId) {
         this.id = id;
         this.name = name;
         this.body = body;
+        this.userId = userId;
     }
 
     public Article(){}
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -35,5 +37,13 @@ public class Article {
 
     public void setBody(String body) {
         this.body = body;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

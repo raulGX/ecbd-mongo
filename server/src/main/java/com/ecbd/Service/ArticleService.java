@@ -17,7 +17,7 @@ public class ArticleService {
         return this.articleDao.getAllArticles();
     }
 
-    public Article getArticleById(int id) {
+    public Article getArticleById(String id) {
         return this.articleDao.getArticleById(id);
     }
 
@@ -27,5 +27,9 @@ public class ArticleService {
 
     public void insertArticle(Article article) {
         articleDao.insertArticle(article);
+    }
+
+    public Collection<Article> getMyArticles(String id) {
+        return articleDao.getArticlesForUser(id);
     }
 }

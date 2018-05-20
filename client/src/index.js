@@ -10,6 +10,7 @@ import HomePage from './components/home/HomePage';
 import ArticlesPage from './components/articles/Articles';
 import MyArticles from './components/articles/MyArticles';
 import MyArticle from './components/articles/MyArticle';
+import NewArticle from './components/articles/NewArticle';
 import SpecificArticlePage from './components/articles/SpecificArticlePage';
 
 import 'bootstrap/dist/css/bootstrap.css';
@@ -23,6 +24,7 @@ render(
       <Route exact path='/articles' component={ArticlesPage} />
       <Route exact path='/myarticles' component={MyArticles} />
       <Route path='/myarticles/:articleId' component={MyArticle} />
+      <Route path='/newArticle' component={NewArticle} />
       <Route path='/articles/:articleId' component={SpecificArticlePage} />
       <Route path='/login' component={Login} />
       <Route path='/register' component={Register} />

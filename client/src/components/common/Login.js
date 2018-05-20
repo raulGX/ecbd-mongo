@@ -1,44 +1,46 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import loginApi from '../../api/loginApi';
+import axios from 'axios';
+import { API_URL } from './constants';
 
 class Login extends React.Component {
   constructor(props) {
     super(props)
+    this.state = {
+      name: '',
+      password: ''
+    }
     this.login = this.login.bind(this)
   }
-  login() {
-    let { email, password } = this;
-    loginApi.login(email.value, password.value)
+  onChange = name => e => this.setState({ [name]: e.target.value })
+  login(e) {
+    e.preventDefault()
+    axios.post(API_URL + 'auth/login', this.state)
       .then(response => {
-        let token = response.data.token
-        let isAdmin = response.data.isAdmin
+        let token = response.data
 
         window.localStorage.setItem("token", token)
-        window.localStorage.setItem("isAdmin", "" + isAdmin)
-
-        window.location.reload()
         this.props.history.push('/')
       })
-      .catch(error => console.log(error))
+      .catch(error => alert(error.response.data.message || 'Network error'))
   }
   render() {
     return (
       <div className="container">
         <div className="row">
-          <div className="col-xs-offset-4 col-xs-4">
+          <form onSubmit={this.login} className="col-xs-offset-4 col-xs-4">
             <div className="input-group">
               <label>Username</label>
-              <input ref={input => this.email = input } type="text" className="form-control" placeholder="Username" />
+              <input onChange={this.onChange('name')} value={this.state.name} type="text" className="form-control" placeholder="Username" required />
             </div>
             <div className="input-group">
               <label>Password</label>
-              <input ref={input => this.password = input } type="password" className="form-control" placeholder="Password" />
+              <input onChange={this.onChange('password')} value={this.state.password} type="password" className="form-control" placeholder="Password" required />
             </div>
-            <button className="btn btn-default" type="submit" onClick={this.login}>Login</button>
+            <button className="btn btn-default" type="submit" onClick={() => { }}>Login</button>
             <br />
             <Link to="/register">Register</Link>
-          </div>
+          </form>
         </div>
       </div>
     );

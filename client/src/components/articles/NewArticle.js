@@ -1,26 +1,20 @@
 import React from 'react';
-import { Button, Modal, FormControl, ControlLabel } from 'react-bootstrap';
 
 import { API_URL } from '../common/constants'
 import axios from 'axios';
 
 
-class MyArticle extends React.Component {
+class NewArticle extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { article: null }
-  }
-
-  componentDidMount() {
-    axios.get(API_URL + 'articles/' + this.props.match.params.articleId)
-      .then(res => this.setState({ article: res.data }))
+    this.state = { article: { name: '', body: '' } }
   }
 
   onChange = name => e => this.setState({ article: { ...this.state.article, [name]: e.target.value } })
 
   save = e => {
     e.preventDefault()
-    axios.put(API_URL + 'articles/' + this.props.match.params.articleId, this.state.article)
+    axios.post(API_URL + 'articles')
       .then(() => {
         alert('article saved!')
         this.props.history.push('/myArticles')
@@ -30,10 +24,6 @@ class MyArticle extends React.Component {
 
   render() {
     let { article } = this.state
-    if (!article) {
-      return <p>Loading</p>
-    }
-
     return (
       <div className="container">
         <div className="row">
@@ -57,4 +47,4 @@ class MyArticle extends React.Component {
   }
 }
 
-export default MyArticle;
+export default NewArticle;

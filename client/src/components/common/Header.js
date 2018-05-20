@@ -35,6 +35,7 @@ class Header extends React.Component {
           <li className="dropdown">
             <a className="dropdown-toggle" data-toggle="dropdown" onClick={this.toggleMenu} role="button">My account <span className="caret"></span></a>
             <ul ref={input => this.menu = input} onClick={this.toggleMenu} className={"dropdown-menu display-" + this.state.showMenu}>
+              <li><NavLink to="/newArticle" activeClassName="active">New Article</NavLink></li>
               <li><NavLink to="/myArticles" activeClassName="active">My Articles</NavLink></li>
               <li><NavLink to="/" onClick={this.logout} activeClassName="active">Logout</NavLink></li>
             </ul>

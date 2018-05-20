@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 import { API_URL } from '../common/constants'
+
 class Articles extends React.Component {
   constructor(props) {
     super(props)
