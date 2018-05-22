@@ -14,7 +14,8 @@ class NewArticle extends React.Component {
 
   save = e => {
     e.preventDefault()
-    axios.post(API_URL + 'articles')
+    let token = localStorage.getItem('token')
+    axios.post(API_URL + 'articles', this.state.article, { headers: { Authorization: token } })
       .then(() => {
         alert('article saved!')
         this.props.history.push('/myArticles')
@@ -27,18 +28,20 @@ class NewArticle extends React.Component {
     return (
       <div className="container">
         <div className="row">
-          <form onSubmit={this.save} className="col-md-12">
-            <div className="input-group">
-              <label>Title</label>
-              <input onChange={this.onChange('name')} value={this.state.article.name} type="text" className="form-control" placeholder="Title" required />
-            </div>
+          <div className="col-md-8 col-md-offset-2">
+            <form onSubmit={this.save}>
+              <div className="form-group">
+                <label>Title</label>
+                <input onChange={this.onChange('name')} value={this.state.article.name} type="text" className="form-control" placeholder="Title" required />
+              </div>
 
-            <div className="input-group">
-              <label>Body</label>
-              <textarea onChange={this.onChange('body')} value={this.state.article.body} type="text" className="form-control" placeholder="Body" required />
-            </div>
-            <button type="submit">Save</button>
-          </form>
+              <div className="form-group">
+                <label>Body</label>
+                <textarea onChange={this.onChange('body')} value={this.state.article.body} type="text" className="form-control" placeholder="Body" required />
+              </div>
+              <button type="submit">Save</button>
+            </form>
+          </div>
         </div>
       </div>
 

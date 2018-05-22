@@ -14,7 +14,7 @@ public class UserCollectionBridge {
     private static String salt = "ecbdMongoProiect";
     public static boolean addUser(User user) {
         MongoCollection<Document> userCollection = DbSingleton.getInstance().getUserCollection();
-        FindIterable<Document> found = userCollection.find(eq(new Document().put("name", user.getName())));
+        FindIterable<Document> found = userCollection.find(eq("name", user.getName()));
         Document first = found.first();
         if (first != null) {
             return false;
@@ -27,9 +27,15 @@ public class UserCollectionBridge {
 
     }
 
+    public static Document getUser(String name) {
+        MongoCollection<Document> userCollection = DbSingleton.getInstance().getUserCollection();
+        FindIterable<Document> found = userCollection.find(eq("name", name));
+        Document first = found.first();
+        return first;
+    }
+
     public static Document makeUserDocument(User user) {
         Document userDoc = new Document();
-        userDoc.put("_id", user.getId());
         userDoc.put("name", user.getName());
         String unhashed = user.getPassword();
         String generatedPassword = null;

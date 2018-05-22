@@ -19,8 +19,9 @@ public class ArticleController {
     private ArticleService articleService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public Collection<Article> getAllArticles() {
-        return articleService.getAllArticles();
+    public Collection<Article> getAllArticles(@RequestParam(value="page", required=true) String page,
+                                              @RequestParam(value="search", required=false) String search) {
+        return articleService.getAllArticles(page, search);
     }
 
     @RequestMapping(value="/myArticles", method = RequestMethod.GET)
@@ -40,7 +41,9 @@ public class ArticleController {
     }
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void insertArticle(@RequestBody Article article) {
+    public void insertArticle(@RequestBody Article article, @RequestHeader("Authorization") String token) {
+        User user = Encoder.decodeUser(token);
+        article.setUserId(user.getId());
         articleService.insertArticle(article);
     }
 }

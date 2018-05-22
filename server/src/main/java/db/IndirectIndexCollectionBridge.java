@@ -16,15 +16,16 @@ public class IndirectIndexCollectionBridge {
     public static final String DocumentKey = "_id";
     public static final String DocumentValue = "values";
 
-    public static void addIndirectIndex(HashMap<String, HashMap<String, Double>> indirectIndex) {
+    public static void addIndirectIndex(HashMap<String, Integer> indirectIndex, String id) {
         MongoCollection<Document> indirectIndexCollection = DbSingleton.getInstance().getIndirectIndexCollection();
-
+        System.out.println("wrote" + indirectIndex.size());
         Iterator<String> iterator = indirectIndex.keySet().iterator();
 
         while (iterator.hasNext()) {
             String key = iterator.next();
 
-            List<Document> listOfApperances = DbUtils.fromMapToList(indirectIndex.get(key));
+            List<String> listOfApperances = new LinkedList<>();
+            listOfApperances.add(id);
             Document query = new Document(DocumentKey, key);
 
             Document updateOnInsert = new Document(DocumentValue,

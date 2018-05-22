@@ -11,6 +11,7 @@ public final class DbSingleton {
     private static volatile MongoClient mClient;
     private static final String DbName = "ecbd";
     private static final String UserCollection = "user";
+    private static final String ArticleCollection = "article";
     private static final String IndirectIndexCollection = "indirectindex";
     private MongoClient getMongoClient() {
         if (mClient == null) {
@@ -25,6 +26,9 @@ public final class DbSingleton {
 
     public MongoCollection<Document> getUserCollection() {
         return getDB().getCollection(UserCollection);
+    }
+    public MongoCollection<Document> getArticleCollection() {
+        return getDB().getCollection(ArticleCollection);
     }
 
     public MongoCollection<Document> getIndirectIndexCollection() {

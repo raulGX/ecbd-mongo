@@ -1,6 +1,8 @@
 package com.ecbd.Dao;
 
 import com.ecbd.Entity.Article;
+import db.ArticleCollectionBridge;
+import db.DbSingleton;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
@@ -27,30 +29,23 @@ public class ArticleDao {
         };
     }
 
-    public Collection<Article> getAllArticles() {
-        return this.articles.values();
+    public Collection<Article> getAllArticles(String page, String search) {
+        return ArticleCollectionBridge.getArticles(page, search);
     }
 
     public Collection<Article> getArticlesForUser(String id) {
-        return this.articles.entrySet().stream()
-                .filter(article -> article.getValue().getUserId().equals(id))
-                .map(entry -> entry.getValue())
-                .collect(Collectors.toList());
+        return ArticleCollectionBridge.getMyArticles(id);
     }
 
     public Article getArticleById(String id) {
-        return articles.get(id);
+        return ArticleCollectionBridge.getArticle(id);
     }
-
     public void updateArticle(Article article) {
-        Article current = articles.get(article.getId());
-        current.setBody(article.getBody());
-        current.setName(article.getName());
-        articles.put(current.getId(), current);
+        ArticleCollectionBridge.updateArticle(article);
+
     }
 
     public void insertArticle(Article article) {
-        article.setId(""+articles.size());
-        articles.put(""+articles.size(), article);
+        ArticleCollectionBridge.addArticle(article);
     }
 }
